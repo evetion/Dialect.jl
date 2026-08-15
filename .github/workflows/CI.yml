@@ -26,7 +26,7 @@ jobs:
       matrix:
         # Dialect needs `Core._setparser!`, which is only available from 1.13 on.
         version:
-          - '~1.13-rc1'
+          - '~1.13.0-rc1'
           - 'pre'
           - 'nightly'
         os:
