@@ -204,6 +204,21 @@ function _parser_hook(code, filename, offset, options)
     end
 end
 
+@static if VERSION >= v"1.14.0-DEV"
+    # Julia 1.14 gives Main a syntax-versioned parser that takes precedence
+    # over Core._parse. Extend its dispatcher without replacing that parser.
+    function Base.MainInclude.var"#_internal_julia_parse"(
+            code, filename::String, lineno::Int, offset::Int, options::Symbol)
+        parser = Base.MainInclude.main_parser[]
+        isnothing(_active_dialect[]) &&
+            return parser(code, filename, lineno, offset, options)
+        locale = _locale_from_filename(filename)
+        return _with_filename_locale(locale) do
+            parser(code, filename, lineno, offset, options)
+        end
+    end
+end
+
 function _install_parser()
     isnothing(_installed_parser[]) ||
         error("Dialect's parser is already installed")
