@@ -1,13 +1,18 @@
 name = "Dialect"
 uuid = "718fa6eb-f92b-4e6f-943a-a0bb95c9ddc3"
+version = "0.1.0"
 authors = ["Maarten Pronk <git@evetion.nl> and contributors"]
-version = "1.0.0-DEV"
+
+[deps]
+Preferences = "21216c6a-2e73-6563-6e65-726566657250"
 
 [compat]
-julia = "1.10.10"
+Preferences = "1"
+julia = "1.13"
 
 [extras]
+JuliaSyntaxHighlighting = "ac6e5ff7-fb65-4e79-a425-ec3bc9c03011"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["Test"]
+test = ["JuliaSyntaxHighlighting", "Test"]
